@@ -1,0 +1,8 @@
+Year: {{ date.0 }}
+Month: {{ date.1 }}
+Day: {{ date.2 }}
+<hr/>
+
+{% for image in images %}
+<img src="{{ MEDIA_URL }}{{ image.image.name }}"/>
+{% endfor %}
