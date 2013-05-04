@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^images/', include('images.urls')),
+    url(r'^upload/', include('multiuploader.urls')),
+    url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

@@ -30,8 +30,4 @@ class Image(models.Model):
         
         super(Image, self).save(*args, **kwargs)
 
-## delete is done with a custom Admin action - see admin.py
-#    def delete(self, *args, **kwargs):
-#        print "Deleting %s" % self.image.name
-#        os.remove(self.image.name)
-#        super(Image, self).delete(*args, **kwargs)
+    ## delete is done with a custom Admin action - see admin.py
