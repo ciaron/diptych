@@ -31,3 +31,8 @@ class Image(models.Model):
         super(Image, self).save(*args, **kwargs)
 
     ## delete is done with a custom Admin action - see admin.py
+
+#class Pair(models.Model):
+#    image_a = models.ForeignKey(Image, blank=True, null=True)
+#    image_b = models.ForeignKey(Image, blank=True, null=True)
+#    date = models.DateField(blank = True, default = datetime.now())

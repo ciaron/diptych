@@ -1,8 +1,132 @@
-Year: {{ date.0 }}
-Month: {{ date.1 }}
-Day: {{ date.2 }}
-<hr/>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="keywords" content="daily, photo, photograph, 365, catherine, soto, ciaron, linstead, project, dailyphoto" />
+<meta name="description" content="A Daily Photograph project by Catherine Soto and Ciaron Linstead" />
+<title>A Photo A Day - Diptyches</title>
+<style type="text/css">
+body {
+    margin:50px 0px; 
+    padding:0px;
+    text-align:center;
+}
+
+.centered {
+    width:1100px;
+    height:500px;
+    margin:0px auto;
+    text-align:left;
+}
+
+.image{
+width:500px;
+height:500px;
+text-align:center; /* horizontal in all browsers */
+display:table-cell; vertical-align:middle; /* ~= valign=center in CSS2 browsers */
+}
+
+.image img {
+    vertical-align: middle;
+}
+td {
+    vertical-align: middle;
+    color:#555;
+}
+
+a{
+color:#0063d0;
+text-decoration: none;
+}
+
+</style>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.3/dojo/dojo.xd.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<script type='text/javascript'>
+var isCtrl = false;
+var key = {ctrl: 17, left: 37, right: 39, home: 36, end: 35}
+
+$(document).keyup(function (e) {
+
+    if(e.which == key.ctrl) {
+        isCtrl=false;
+    }
+
+}).keydown(function (e) {
+    if(e.which == key.ctrl) { 
+        isCtrl=true;
+    }
+
+    if(e.which == key.left && isCtrl == true) {
+            if ($("a#firstlink").attr('href') != undefined) {
+                location.href = $('a#firstlink').attr('href'); 
+            }
+    } else if (e.which == key.left && isCtrl == false) {
+            if ($("a#prevlink").attr('href') != undefined) {
+                location.href = $('a#prevlink').attr('href'); 
+            }
+    }
+
+    if(e.which == key.right && isCtrl == true) {
+            if ($("a#lastlink").attr('href') != undefined) {
+                location.href = $('a#lastlink').attr('href'); 
+            }
+    } else if (e.which == key.right && isCtrl == false){
+            if ($("a#nextlink").attr('href') != undefined) {
+                location.href = $('a#nextlink').attr('href'); 
+            }
+    }
+});
+
+</script>
+
+</head>
+
+<body style="font-family:arial; font-size:small">
+
+<div class=centered id="imagetable">
+
+<table>
+  <tr>
+    <td><b>Day {{ current_day }}</b></td>
+    <td style='text-align:right;'>Year: {{ date.0 }} Month: {{ date.1 }} Day: {{ date.2 }}</td>
+  </tr>
+  <tr></tr><tr></tr>
+  <tr>
 
 {% for image in images %}
-<img src="{{ MEDIA_URL }}{{ image.image.name }}"/>
+    {% if image.image.width > image.image.height %}
+        <td class=image id="{% cycle 'limage' 'rimage'%}">  <img src='{{MEDIA_URL }}{{ image.image.name }}' width='500'/></td>  
+    {% else %}
+        <td class=image id="{% cycle 'limage' 'rimage'%}">  <img src='{{MEDIA_URL }}{{ image.image.name }}' height='500'/></td>  
+    {% endif %}
 {% endfor %}
+
+  </tr>
+  <tr>
+    <td style='text-align:right; font-size:large; padding:15px;'><a id='firstlink' href='/dailyphoto/2009/12/02' title='first'>&laquo;</a> <a id='prevlink' href='/dailyphoto/2013/04/06' title='prev'>&lsaquo;</a></td>
+    <td style='text-align:left; font-size:large; padding:15px;'>&rsaquo; &raquo;</td>
+  </tr>
+  <tr></tr><tr></tr><tr></tr>
+  <tr>
+    <td></td><td></td>
+    <td style='text-align:center;'><a href='http://ciaron.net'>cl</a></td><td>/</td><td style='text-align:center;'><a href='http://catherinesoto.com'>cs</a></td>
+    <td></td><td></td>
+    <td><a style='float:right;' href='feed.php'>rss</a></td>
+
+  </tr>
+</table>
+
+</div>
+
+<div style="color:#999;position:absolute; top:97%;">
+keyboard navigation: arrows:previous/next Ctrl+arrows:first/last 
+</div>
+</body>
+</html>
+
+
